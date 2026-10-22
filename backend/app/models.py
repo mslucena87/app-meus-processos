@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Date, ForeignKey
+from sqlalchemy import Column, Integer, String, Date, Text, ForeignKey
 from sqlalchemy.orm import relationship
 from .database import Base
 
@@ -17,6 +17,7 @@ class Processo(Base):
     tribunal = Column(String(20), nullable=False)
     classe = Column(String(150))
     orgao_julgador = Column(String(200))
+    resumo_ia = Column(Text, nullable=True)
 
     prazos = relationship("Prazo", back_populates="processo", cascade="all, delete-orphan")
 

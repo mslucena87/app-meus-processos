@@ -1,8 +1,8 @@
-# ⚖️ LegalOps — Dashboard & Monitoramento DataJud / PDPJ
+# ⚖️ LegalOps — Dashboard, Monitoramento DataJud & Insights de IA
 
-O **LegalOps** é uma aplicação web desenvolvida para advogados e escritórios de advocacia automatizarem a consulta de processos via **DataJud (CNJ)** e gerenciarem seus prazos processuais com cálculo automatizado de dias úteis (CPC).
+O **LegalOps** é uma aplicação web desenvolvida para advogados e escritórios de advocacia automatizarem a consulta de processos via **DataJud (CNJ)**, gerenciarem seus prazos processuais com cálculo de dias úteis e contarem com um **motor de Inteligência Artificial (Gemini)** para extração automática de prazos e resumos executivos.
 
-O projeto foi projetado seguindo uma arquitetura pragmática, limpa e modular (Clean Code / SOLID), focando em alta performance e entrega rápida sem *over-engineering*.
+O projeto foi construído seguindo uma arquitetura pragmática, limpa e modular (Clean Code / SOLID), focando em alta performance e entrega rápida sem *over-engineering*.
 
 ---
 
@@ -12,6 +12,7 @@ O projeto foi projetado seguindo uma arquitetura pragmática, limpa e modular (C
 * **Python 3.10+** / **FastAPI**: Framework web assíncrono e de alta performance.
 * **SQLAlchemy 2.0**: ORM para manipulação e persistência de dados.
 * **SQLite / PostgreSQL**: Banco de dados relacional (configurável).
+* **Google GenAI SDK (Gemini)**: IA generativa para leitura de andamentos processuais, resumos e extração inteligente de prazos.
 * **PyJWT & Passlib (Bcrypt)**: Autenticação segura via tokens JWT e criptografia de senhas.
 * **Requests**: Cliente HTTP para comunicação com a API REST do DataJud/CNJ.
 
@@ -25,11 +26,11 @@ O projeto foi projetado seguindo uma arquitetura pragmática, limpa e modular (C
 
 ## 📌 Funcionalidades Principais
 
-* **🔒 Autenticação & Segurança**: Tela de login com autenticação por Token JWT e armazenamento seguro no `localStorage`.
-* **🔄 Sincronização via DataJud**: Integração com a API pública do Conselho Nacional de Justiça (CNJ) para buscar processos por número de OAB, UF e Tribunal (ex: TJSP, TJRJ, TRF3).
+* **🔒 Autenticação & Segurança**: Tela de login com autenticação por Token JWT, rota protegida e armazenamento seguro no `localStorage`.
+* **🔄 Sincronização Inteligente via DataJud + IA**: Integração com a API pública do CNJ para buscar processos por OAB, enviando as últimas movimentações diretamente para a IA estruturar prazos e gerar resumos executivos.
+* **🤖 Resumos Executivos Automatizados**: A IA analisa o andamento do processo e sintetiza o status jurídico para tomada de decisão rápida.
 * **📊 Dashboard de Métricas**: Indicadores visuais de total de processos, prazos pendentes e alertas de urgência (prazos vencendo em até 3 dias).
-* **📅 Calculadora de Prazos Processuais**: Algoritmo para cálculo de data fatal considerando contagem em dias úteis (Art. 219 do CPC).
-* **⚡ Interface Responsiva & Moderna**: Tabela dinâmica com destaques visuais (`Badges`) de prioridade e suporte a múltiplos tribunais.
+* **⚡ Interface Responsiva & Moderna**: Tabela dinâmica com destaques visuais (`Badges`) de prioridade e suporte a múltiplos tribunais (TJSP, TJRJ, TJMG, TRF3).
 
 ---
 
@@ -44,14 +45,15 @@ legalops/
 │   │   ├── models.py         # Modelos do Banco (Usuario, Processo, Prazo)
 │   │   ├── schemas.py        # Validações Pydantic / DTOs
 │   │   ├── datajud.py        # Integrador HTTP da API do DataJud
+│   │   ├── ai.py             # Serviço de Inteligência Artificial (Gemini)
 │   │   ├── calculator.py     # Motor de Cálculo de Prazos Processuais (CPC)
-│   │   └── main.py          # Endpoints FastAPI e Regras de Autenticação
+│   │   └── main.py           # Endpoints FastAPI, Auth e Sincronização
 │   ├── .env                  # Variáveis de ambiente (Chaves de API)
 │   └── requirements.txt      # Dependências Python
 └── frontend/
     ├── src/
     │   ├── api.ts            # Configuração Axios + Interceptors JWT
-    │   ├── App.tsx           # Componente Principal (Login + Dashboard)
+    │   ├── App.tsx           # Componente Principal (Login + Dashboard + IA)
     │   ├── main.tsx          # Ponto de entrada React
     │   └── index.css         # Importações do Tailwind CSS
     ├── package.json

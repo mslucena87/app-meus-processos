@@ -1,0 +1,22 @@
+# Python / Backend
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+.env
+*.db
+*.sqlite3
+
+# Node.js / Frontend
+node_modules/
+dist/
+build/
+.vite/
+
+# Sistema Operacional / IDEs
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log

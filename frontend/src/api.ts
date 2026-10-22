@@ -7,7 +7,7 @@ const api = axios.create({
 // Interceptor para injetar o token JWT em todas as requisições protegidas
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
-  if (token) {
+  if (token && config.headers) {
     config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
@@ -29,11 +29,21 @@ export interface Prazo {
   status: string;
 }
 
+export interface Processo {
+  id: number;
+  numero_cnj: string;
+  tribunal: string;
+  classe: string;
+  orgao_julgador: string;
+  resumo_ia?: string;
+}
+
 export const login = (email: string, senha: string) => 
   api.post<{ access_token: string }>('/login', { email, senha });
 
 export const getStats = () => api.get<DashboardStats>('/dashboard/stats');
 export const getPrazos = () => api.get<Prazo[]>('/prazos');
+
 export const sincronizarOab = (oab_numero: string, oab_uf: string, tribunal: string) => 
   api.post('/sincronizar', { oab_numero, oab_uf, tribunal });
 

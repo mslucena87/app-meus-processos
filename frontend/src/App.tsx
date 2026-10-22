@@ -22,7 +22,6 @@ export default function App() {
       setPrazos(resPrazos.data);
     } catch (err) {
       console.error('Erro ao carregar dados:', err);
-      // Se der erro 401, limpa o token
       handleLogout();
     }
   };
@@ -57,7 +56,7 @@ export default function App() {
     try {
       await sincronizarOab(oabNum, oabUf, tribunal);
       await carregarDados();
-      alert('Sincronização concluída com sucesso!');
+      alert('Sincronização com IA concluída com sucesso!');
     } catch (err) {
       alert('Erro ao sincronizar com o DataJud.');
     } finally {
@@ -85,7 +84,7 @@ export default function App() {
             <div>
               <label className="block text-xs font-bold text-slate-600 uppercase mb-1">E-mail</label>
               <input
-                type="email5"
+                type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="admin@legalops.com"
@@ -120,14 +119,14 @@ export default function App() {
     );
   }
 
-  // Dashboard normal autenticado
+  // Dashboard normal autenticado com suporte a IA
   return (
     <div className="min-h-screen bg-slate-50 text-slate-800">
       <header className="bg-white border-b border-slate-200">
         <div className="max-w-6xl mx-auto px-6 py-4 flex flex-wrap justify-between items-center gap-4">
           <div>
             <h1 className="text-xl font-bold text-slate-900">LegalOps Dashboard</h1>
-            <p className="text-xs text-slate-500">Monitoramento DataJud e Consulta de Prazos</p>
+            <p className="text-xs text-slate-500">Monitoramento DataJud & Insights de IA</p>
           </div>
 
           <div className="flex items-center gap-4">
@@ -164,7 +163,7 @@ export default function App() {
                 disabled={loading}
                 className="bg-blue-600 hover:bg-blue-700 text-white text-sm px-4 py-1.5 rounded-lg font-medium transition disabled:opacity-50"
               >
-                {loading ? 'Sincronizando...' : 'Sincronizar'}
+                {loading ? 'Sincronizando com IA...' : 'Sincronizar IA'}
               </button>
             </form>
 
@@ -179,6 +178,7 @@ export default function App() {
       </header>
 
       <main className="max-w-6xl mx-auto px-6 py-8">
+        {/* Cards de Métricas */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
             <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Total de Processos</span>
@@ -194,9 +194,22 @@ export default function App() {
           </div>
         </div>
 
+        {/* Card Informativo da IA */}
+        <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-8">
+          <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+            <h2 className="text-sm font-bold text-slate-800">🤖 Motor de Inteligência Artificial Ativo</h2>
+          </div>
+          <div className="p-6">
+            <p className="text-sm text-slate-600">
+              As consultas via DataJud processam automaticamente as movimentações através da IA para extrair prazos fatais e resumos executivos.
+            </p>
+          </div>
+        </div>
+
+        {/* Tabela de Prazos */}
         <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
           <div className="px-6 py-4 border-b border-slate-100">
-            <h2 className="text-base font-bold text-slate-900">Prazos Processuais Cadastrados</h2>
+            <h2 className="text-base font-bold text-slate-900">Prazos Processuais Identificados</h2>
           </div>
           <table className="w-full text-left border-collapse">
             <thead>
