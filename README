@@ -1,6 +1,6 @@
-# ⚖️ LegalOps — Dashboard, Monitoramento DataJud & Insights de IA
+# ⚖️ Meus Processos — Dashboard, Monitoramento DataJud & Insights de IA
 
-O **LegalOps** é uma aplicação web desenvolvida para advogados e escritórios de advocacia automatizarem a consulta de processos via **DataJud (CNJ)**, gerenciarem seus prazos processuais com cálculo de dias úteis e contarem com um **motor de Inteligência Artificial (Gemini)** para extração automática de prazos e resumos executivos.
+O **Meus Processos** é uma aplicação web desenvolvida para advogados e escritórios de advocacia automatizarem a consulta de processos via **DataJud (CNJ)**, gerenciarem seus prazos processuais com cálculo de dias úteis e contarem com um **motor de Inteligência Artificial (Gemini)** para extração automática de prazos e resumos executivos.
 
 O projeto foi construído seguindo uma arquitetura pragmática, limpa e modular (Clean Code / SOLID), focando em alta performance e entrega rápida sem *over-engineering*.
 
